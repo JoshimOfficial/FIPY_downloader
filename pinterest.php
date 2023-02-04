@@ -1,25 +1,13 @@
 <?php
+//Starting a session for scrape YouTube
+session_start();
 include "./conn/conn.php";
 include "./assets/files/get_webfixer/latest_webfixer.php";
 include "./assets/files/header/body_header.php";
 include "./assets/files/footer/footer_main.php";
-include "./assets/files/header/hero_section.php";
-
-
-//Starting a session for scrape YouTube
-session_start();
-function generateRandomString($length = 50) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $randomString;
-}
-$_SESSION["user_session_id"] = md5(generateRandomString());
-setcookie("_SESSION", md5($_SESSION["user_session_id"]), time() + 120, "/");
-
+include "./assets/files/pinterest/body_section.php";
+$current_url = get_latest_webfixer($conn);
+$_SESSION["pinterest_location"] = "$current_url/pinterest.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,24 +35,9 @@ body_header_navbar($conn,get_latest_webfixer($conn));
 
 <!-- Header hero section design started -->
 <?php
-   header_hero_section(get_latest_webfixer($conn));
+   pinterest_body(get_latest_webfixer($conn));
 ?>
 <!-- Header hero section design ended -->
-
-<script>
-fetch("./assets/files/scraper/youtube/yt_video_info.php")
-  .then(response => response.text())
-  .then(html => {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, "text/html");
-    const info = doc.querySelector("yt-formatted-string#info");
-    if (info) {
-      console.log(info.innerHTML);
-    } else {
-      console.error("Element not found");
-    }
-  });
-</script>
 
 <!-- Footer section design started -->
 <?php echo footer(get_latest_webfixer($conn));?>

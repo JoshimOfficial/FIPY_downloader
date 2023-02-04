@@ -1,11 +1,11 @@
 <?php
-  function body_header_navbar($give_latest_webfixer) {
+  function body_header_navbar($conn, $give_latest_webfixer) {
 ?>
 <nav class="bg-white border-gray-200 px-2 md:px-4 py-2.5  md:border-b-2 dark:border-gray-700 dark:bg-gray-900" style="padding: 20px;">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto">
         <a href="<?php echo $give_latest_webfixer;?>" class="flex items-center">
             <img src="<?php echo $give_latest_webfixer;?>/assets/logo_fav/logo.svg" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
-            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">FIP Downloader</span>
+            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">FIPY Downloader</span>
         </a>
         <div class="md:hidden flex items-center md:order-2">
             
@@ -18,7 +18,7 @@
             <ul class="flex flex-col mt-4 text-sm font-medium md:flex-row md:space-x-8 md:mt-0">
                 
                 <li>
-                    <a href="#" class="block py-2 pl-3 pr-4 text-blue-600  hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-blue-500 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700 rounded" aria-current="page">Home</a>
+                    <a href="<?php echo get_latest_webfixer($conn)?>" class="block py-2 pl-3 pr-4 text-blue-600  hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-blue-500 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700 rounded" aria-current="page">Home</a>
                 </li>
                 <li>
                     <a href="#" class="block py-2 pl-3 pr-4 text-gray-700  hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-gray-400 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700 rounded">How to use</a>
@@ -51,7 +51,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="flex items-center text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 group rounded">
+                                    <a href="<?php echo get_latest_webfixer($conn)?>/pinterest.php" class="flex items-center text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 group rounded">
                                         <span class="sr-only">pinterest category</span>
                                     
                                         <svg class="w-4 h-4 mr-2 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -71,7 +71,7 @@
                                         </svg>
 
 
-                                        Pinterest Downloader (comming soon)
+                                        Pinterest Downloader
                                     </a>
                                 </li>
                             </ul>
