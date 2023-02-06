@@ -4,8 +4,6 @@ include "./assets/files/get_webfixer/latest_webfixer.php";
 include "./assets/files/header/body_header.php";
 include "./assets/files/footer/footer_main.php";
 include "./assets/files/header/hero_section.php";
-
-
 //Starting a session for scrape YouTube
 session_start();
 function generateRandomString($length = 50) {
@@ -50,21 +48,6 @@ body_header_navbar($conn,get_latest_webfixer($conn));
    header_hero_section(get_latest_webfixer($conn));
 ?>
 <!-- Header hero section design ended -->
-
-<script>
-fetch("./assets/files/scraper/youtube/yt_video_info.php")
-  .then(response => response.text())
-  .then(html => {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, "text/html");
-    const info = doc.querySelector("yt-formatted-string#info");
-    if (info) {
-      console.log(info.innerHTML);
-    } else {
-      console.error("Element not found");
-    }
-  });
-</script>
 
 <!-- Footer section design started -->
 <?php echo footer(get_latest_webfixer($conn));?>

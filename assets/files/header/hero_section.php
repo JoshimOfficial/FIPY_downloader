@@ -111,7 +111,7 @@
             <br class="hidden md:flex">
             <div class="w-full flex justify-around items-center">
                <div>
-                  <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">To copy a Facebook video link from a mobile device:</h2>
+                  <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">To copy a YouTube video link from a mobile device:</h2>
                   <ul class="max-w-md space-y-1 text-gray-500 list-inside dark:text-gray-400">
                      <li class="flex items-center">
                         <svg class="w-4 h-4 -mt-6 mr-1.5 text-green-500 dark:text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

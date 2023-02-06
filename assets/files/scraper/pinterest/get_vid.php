@@ -14,7 +14,7 @@ if(isset($_COOKIE["_PINTEREST_VID_LINK"])) {
 
 <h2 class="mt-5 text-2xl md:text-4xl tracking-tight font-extrabold text-gray-900 text-center dark:text-white">Pinterest Video Downloader:</h2>
 <h6 class="mt-5  tracking-tight text-red-600 text-center ">
-    Only pinterest.com domains are allowed!
+    Only https://pinterest.com domains are allowed!
   </h6>
 
 <?php
@@ -48,27 +48,10 @@ if(isset($_COOKIE["_PINTEREST_VID_LINK"])) {
       return $datetime->format('d-m-Y \a\t g:iA');
   }
 
-  function video_caption($string) {
-    preg_match("/^\w{3} \d{2}, \d{4} - (.*) on Pinterest/", $string, $matches);
-    return $matches[1];
-}
-
-function videos_description($string) {
+function video_caption($string) {
     preg_match("/^(.*) - This Pin was created.*\.(.*)$/", $string, $matches);
     return $matches[2] . " ~ " . $matches[1];
   }
-
-function download_file($url) {
-    header("Content-Type: application/octet-stream");
-    header("Content-Disposition: attachment; filename=" . basename($url));
-    header("Content-Length: " . filesize($url));
-  
-    readfile($url);
-    exit;
-  }
-  
-
-
 
     ?>
 
@@ -105,7 +88,7 @@ function download_file($url) {
                 Video Description
                 </th>
                 <td class="px-6 py-4">
-                <?php echo videos_description($video_description);?>
+                <?php echo $video_description;?>
                 </td>
             </tr>
             
@@ -157,7 +140,12 @@ function download_file($url) {
     <?php
        }
        else {
-          echo "data not found!";
+          ?>
+<h2 class="mt-5 text-2xl md:text-4xl tracking-tight font-extrabold text-gray-900 text-center dark:text-white">Pinterest Video Downloader:</h2>
+<h6 class="mt-5  tracking-tight text-red-600 text-center ">
+    No Pinterest Video Found!
+  </h6>
+          <?php 
        }
     }
 }

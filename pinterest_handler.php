@@ -25,7 +25,7 @@ $start_pinterst_session = pinterst_session();
         $_SESSION["pinterest_session"] = $start_pinterst_session;
         setcookie('_SESSION_PINTEREST', $start_pinterst_session, time() + 5, "/");
         setcookie('_PINTEREST_VID_LINK', $vid_link, time() + 5, "/");
-        header("location: $came_from?user=authorized");
+        header("location: $came_from");
         
     } else {
         
