@@ -31,7 +31,7 @@ if(isset($_COOKIE["_PINTEREST_VID_LINK"])) {
       $video_description = $json_data["description"];
       $video_caption = $json_data["caption"];
       $video_duration = $json_data["duration"];
-      $video_thumbnai = $json_data["thumbnailUrl"];
+      $video_thumbnail = $json_data["thumbnailUrl"];
       $video_upload_date = $json_data["uploadDate"];
       $video_url = $json_data['contentUrl'];
 
@@ -60,7 +60,13 @@ function video_caption($string) {
       <div class="py-8 px-4 mx-auto w-screen sm:py-16 lg:px-6">
          <div class="w-full mb-8 lg:mb-16">
             <div class="w-full flex flex-col md:flex-row  justify-around">
-               <img src="<?php echo $video_thumbnai;?>" class="md:w-96 lg:flex lg:object-fit rounded" style="width:450px;"/>
+
+               
+<video class="w-96 h-auto max-w-full border border-gray-200 rounded-lg dark:border-gray-700" poster="<?php echo $video_thumbnail?>" controls>
+  <source src="<?php echo $video_url;?>" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 
                <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5 md:mt-0">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -122,13 +128,37 @@ function video_caption($string) {
                 Download Link
                 </th>
                 <td class="px-6 py-4">
-                <a href="<?php echo $video_url;?>" target="_blank" class="text-blue-500 underline">Fastest Server</a>
+                <a href="<?php echo $video_url;?>" target="_blank" class="text-blue-500 underline" download>Fastest Server</a>
                 </td>
             </tr>
             
 
         </tbody>
     </table>
+    
+    <div class="mt-5 md:mt-10">
+
+    
+<div id="accordion-arrow-icon" data-accordion="open">
+  <h2 id="accordion-arrow-icon-heading-2">
+    <button type="button" class=" w-full flex items-center justify-between w-full p-3 font-medium text-left text-gray-500 border border-gray-200 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-arrow-icon-body-2" aria-expanded="false" aria-controls="accordion-arrow-icon-body-2">
+      <h4 class="text-center w-full">More Info:</h4>
+      <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z"></path></svg>
+    </button>
+  </h2>
+  <div id="accordion-arrow-icon-body-2" class="hidden" aria-labelledby="accordion-arrow-icon-heading-2">
+    <div class="p-5 font-light border w-full border-gray-200 dark:border-gray-700">
+
+    <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">User Info:</h2>
+    <div id="more_info">
+    <div class="skeleton-kszmgu8easc bg-gray-200 dark:bg-gray-800"></div>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+    </div>
 </div>
 
             </div>

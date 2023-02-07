@@ -35,7 +35,7 @@ setcookie("_SESSION", md5($_SESSION["user_session_id"]), time() + 120, "/");
    <!-- dark and light mode theme check -->
    <script src="<?php echo get_latest_webfixer($conn)?>/theme.js"  ></script>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900">
+<body class="bg-gray-100 dark:bg-gray-900 overflow-x-hidden">
 
 <!-- Header navbar designed started -->
 <?php
