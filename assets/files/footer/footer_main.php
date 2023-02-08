@@ -1,7 +1,7 @@
 <?php 
 function footer($webfixer) {
 ?>
-<footer class="p-4 bg-white rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
+<footer class="p-4 bg-white rounded-lg shadow md:px-6 md:py-8 mt-5 dark:bg-gray-900">
     <div class="sm:flex sm:items-center sm:justify-between">
         <a href="<?php echo $webfixer;?>" class="flex items-center mb-4 sm:mb-0">
             <img src="<?php echo $webfixer;?>/assets/logo_fav/logo.svg" class="h-8 mr-3" alt="Flowbite Logo" />

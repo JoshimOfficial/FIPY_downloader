@@ -9,7 +9,7 @@ preg_match_all('/<a\s+class="[^"]*"\s+href="([^"]+)"[^>]*>/', $data, $matches);
 $links = array_unique($matches[1]);
 
 $get_username = array_values(array_filter($links, function($link) {
-    return strpos($link, '/ideas/') === false && strpos($link, '/videos/') === false && strpos($link, '/today/') === false;
+    return strpos($link, '/ideas/') === false && strpos($link, '/videos/') === false;
 }));
 
     return $get_username;

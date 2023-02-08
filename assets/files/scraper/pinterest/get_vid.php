@@ -48,10 +48,13 @@ if(isset($_COOKIE["_PINTEREST_VID_LINK"])) {
       return $datetime->format('d-m-Y \a\t g:iA');
   }
 
-function video_caption($string) {
-    preg_match("/^(.*) - This Pin was created.*\.(.*)$/", $string, $matches);
-    return $matches[2] . " ~ " . $matches[1];
-  }
+      $fetch_caption = "";
+      if($video_description == $video_caption) {
+        $fetch_caption = "No caption given by the user. ";
+      }
+      else {
+        $fetch_caption = $video_caption;
+      }
 
     ?>
 
@@ -103,7 +106,7 @@ function video_caption($string) {
                 Video Caption
                 </th>
                 <td class="px-6 py-4">
-                <?php echo video_caption($video_caption);?>
+                <?php echo $fetch_caption;?>
                 </td>
             </tr>
             
@@ -167,6 +170,37 @@ function video_caption($string) {
       </div>
    </section>
     
+   <section class="bg-white dark:bg-gray-900">
+  <div class="py-8 px-4  sm:py-16 lg:px-6">
+  <h2 class="mt-5 text-2xl md:text-4xl tracking-tight font-extrabold text-gray-900 text-center dark:text-white mb-5">More video like this:</h2>
+  <div class="space-y-3 md:grid md:grid-cols-4 md:gap-12 md:space-y-0" id="suggested_video">
+
+  <div role="status" class="flex items-center justify-center h-56 max-w-sm bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
+    <svg class="w-12 h-12 text-gray-200 dark:text-gray-600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 384 512"><path d="M361 215C375.3 223.8 384 239.3 384 256C384 272.7 375.3 288.2 361 296.1L73.03 472.1C58.21 482 39.66 482.4 24.52 473.9C9.377 465.4 0 449.4 0 432V80C0 62.64 9.377 46.63 24.52 38.13C39.66 29.64 58.21 29.99 73.03 39.04L361 215z"/></svg>
+    <span class="sr-only">Loading...</span>
+</div>
+
+
+<div role="status" class="flex items-center justify-center h-56 max-w-sm bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
+    <svg class="w-12 h-12 text-gray-200 dark:text-gray-600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 384 512"><path d="M361 215C375.3 223.8 384 239.3 384 256C384 272.7 375.3 288.2 361 296.1L73.03 472.1C58.21 482 39.66 482.4 24.52 473.9C9.377 465.4 0 449.4 0 432V80C0 62.64 9.377 46.63 24.52 38.13C39.66 29.64 58.21 29.99 73.03 39.04L361 215z"/></svg>
+    <span class="sr-only">Loading...</span>
+</div>
+
+
+<div role="status" class="flex items-center justify-center h-56 max-w-sm bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
+    <svg class="w-12 h-12 text-gray-200 dark:text-gray-600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 384 512"><path d="M361 215C375.3 223.8 384 239.3 384 256C384 272.7 375.3 288.2 361 296.1L73.03 472.1C58.21 482 39.66 482.4 24.52 473.9C9.377 465.4 0 449.4 0 432V80C0 62.64 9.377 46.63 24.52 38.13C39.66 29.64 58.21 29.99 73.03 39.04L361 215z"/></svg>
+    <span class="sr-only">Loading...</span>
+</div>
+
+
+<div role="status" class="flex items-center justify-center h-56 max-w-sm bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
+    <svg class="w-12 h-12 text-gray-200 dark:text-gray-600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 384 512"><path d="M361 215C375.3 223.8 384 239.3 384 256C384 272.7 375.3 288.2 361 296.1L73.03 472.1C58.21 482 39.66 482.4 24.52 473.9C9.377 465.4 0 449.4 0 432V80C0 62.64 9.377 46.63 24.52 38.13C39.66 29.64 58.21 29.99 73.03 39.04L361 215z"/></svg>
+    <span class="sr-only">Loading...</span>
+</div>
+
+  </div>
+  </div>
+   </section>
     <?php
        }
        else {

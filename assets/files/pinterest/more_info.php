@@ -12,8 +12,13 @@ if(isset($_POST["link"])) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $video_link = $_POST["link"];
-        $username = trim(get_username($video_link)[1], '/'); //[2] for the server.
-
+        $username = "";
+        if(count(get_username($video_link)) > 2) {
+            $username = trim(get_username($video_link)[2], '/');
+        }
+        else {
+            $username = trim(get_username($video_link)[1], '/');
+        }
         if(get_userheader($username) != "no_headers") {
 
             $user_fullname = get_userheader($username)["name"];
