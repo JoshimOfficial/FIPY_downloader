@@ -65,7 +65,7 @@ if(isset($_COOKIE["_PINTEREST_VID_LINK"])) {
             <div class="w-full flex flex-col md:flex-row  justify-around">
 
                
-<video class="w-96 h-auto max-w-full border border-gray-200 rounded-lg dark:border-gray-700" poster="<?php echo $video_thumbnail?>" controls>
+<video class="w-96 h-fit max-w-full border border-gray-200 rounded-lg dark:border-gray-700" poster="<?php echo $video_thumbnail?>" controls>
   <source src="<?php echo $video_url;?>" type="video/mp4">
   Your browser does not support the video tag.
 </video>
@@ -125,6 +125,12 @@ if(isset($_COOKIE["_PINTEREST_VID_LINK"])) {
                 <td class="px-6 py-4">
                 <?php echo format_datetime($video_upload_date);?>
                 </td>
+            </tr>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                Video Size:
+                </th>
+                <td class="px-6 py-4"><?php echo video_size($video_url);?> MB</td>
             </tr>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">

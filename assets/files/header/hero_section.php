@@ -1,7 +1,10 @@
 <?php 
    function header_hero_section($webfixer) {
       include "./assets/files/scraper/youtube/yt.php";
+      include "./assets/files/scraper/youtube/yt_video_info.php";
+      include "./assets/files/youtube/video_info.php";
    ?>
+   
 <section class="overflow-x-hidden">
    <section class="bg-white dark:bg-gray-900">
       <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
@@ -18,7 +21,19 @@
                      <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                   </svg>
                </div>
-               <input type="text" name="yt_link" id="voice-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded md:h-12 focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://www.youtube.com/watch?v=S19UcWdOA-I" required>
+               <input type="text" name="yt_link" id="voice-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded md:h-12 focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://www.youtube.com/watch?v=S19UcWdOA-I" required 
+               <?php
+               if (isset($_SESSION["user_request"]) && isset($_COOKIE["_REQUESTED"])) {
+                  $cookies_request = $_COOKIE["_REQUESTED"];
+                  $session_link_request = $_SESSION["user_request"];
+                  $link = $_SESSION["requsted_video"];
+                  ?>
+
+value="<?php echo $link?>"
+                  <?php 
+               }
+               ?>
+               >
             </div>
             <input type="hidden" name="current_url" value="<?php $current_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
                echo $current_url;
@@ -34,23 +49,13 @@
    </section>
    <?php 
       if(isset($_SESSION["user_request"]) && isset($_COOKIE["_REQUESTED"])) {
-          $cookies_request = $_COOKIE["_REQUESTED"];
-          $session_link_request = $_SESSION["user_request"];
+         $cookies_request = $_COOKIE["_REQUESTED"];
+         $session_link_request = $_SESSION["user_request"];
+         $link = $_SESSION["requsted_video"];
       
           if($cookies_request == $session_link_request) {
-              ?>
-   <h2 class="mt-5 text-2xl md:text-4xl tracking-tight font-extrabold text-gray-900 text-center dark:text-white">Video Download</h2>
-   <?php
-      $link = $_SESSION["requsted_video"];
-      ?>
-   <div class="p-3 md:w-1/2 m-auto">
-      <style>
-         a.downloadBtn.popbtn {
-         color: #1d69ff;
-         text-decoration: underline;
-         }
-      </style>
-      <?php  
+
+         echo vid_info_component(video_data($link)["title"], video_data($link)["thumbnail"], video_data($link)["duration"], $link);
          echo yt_download_link($link);
          ?>
    </div>

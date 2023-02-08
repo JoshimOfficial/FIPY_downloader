@@ -758,6 +758,12 @@ video {
   height: auto;
 }
 
+.h-fit {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
 .h-56 {
   height: 14rem;
 }
@@ -1585,14 +1591,6 @@ video {
 
   .md\:w-\[850px\] {
     width: 850px;
-  }
-
-  .md\:w-\[550px\] {
-    width: 550px;
-  }
-
-  .md\:w-\[\] {
-    width: ;
   }
 
   .md\:max-w-2xl {

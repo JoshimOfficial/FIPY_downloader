@@ -6,6 +6,7 @@ include "./assets/files/get_webfixer/latest_webfixer.php";
 include "./assets/files/header/body_header.php";
 include "./assets/files/footer/footer_main.php";
 include "./assets/files/pinterest/body_section.php";
+include "./assets/files/scraper/pinterest/get_video_size.php";
 $current_url = get_latest_webfixer($conn);
 $_SESSION["pinterest_location"] = "$current_url/pinterest.php";
 ?>

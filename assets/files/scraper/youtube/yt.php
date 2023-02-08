@@ -16,6 +16,16 @@ if (count($table_matches[1]) > 0) {
     $i = 1;
     foreach ($tables as $table) {
         if ($i == 1) {
+            ?>
+               <h2 class="mt-5 text-2xl md:text-4xl tracking-tight font-extrabold text-gray-900 text-center dark:text-white">Video Download</h2>
+   <div class="p-3 md:w-1/2 m-auto">
+      <style>
+         a.downloadBtn.popbtn {
+         color: #1d69ff;
+         text-decoration: underline;
+         }
+      </style>
+            <?php
             echo "<h2 class='mt-5 mb-2 text-sm md:text-xl tracking-tight font-extrabold text-gray-900 dark:text-white'>Download Links 01 (With audio)</h2>";
         } else {
             echo "<h2 class='mt-5 mb-2 text-sm md:text-xl tracking-tight font-extrabold text-gray-900 dark:text-white'>Download Links 02 (Without audio)</h2>";
