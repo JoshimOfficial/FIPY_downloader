@@ -4,11 +4,9 @@ if(localStorage.getItem("dark_mode")) {
 
     if(get_dark_current_status === "true") {
         document.querySelector("html").classList.add("dark");
-        document.querySelector("#light_mode").classList.remove("hidden");
     }
     else {   
         document.querySelector("html").classList.remove("dark");
-        document.querySelector("#dark_mode").classList.remove("hidden");
     }
 }
 //If user is new then by default light mode will activate.
