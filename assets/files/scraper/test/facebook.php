@@ -2,7 +2,7 @@
 session_start();
 ob_start();
 
-$cookie = "datr=XsjWYztAUQ2Go4c1V5pABtw2; xs=12%3A0xIlnYcX3zztxA%3A2%3A1675020440%3A-1%3A5351%3A%3AAcVDLzSC1FgPA31idbpK0oNzS0mGwLeFv_eRq9w_rMY; m_pixel_ratio=1; c_user=100045943637678; sb=XsjWYyY_PW4TWk162dqRfaa0; wd=1903x955; m_page_voice=100045943637678";
+$cookie = "";
 
 $ch = curl_init("https://mbasic.facebook.com/JoshimOfficiall.acc?v=timeline");
 curl_setopt($ch, CURLOPT_COOKIE, $cookie);

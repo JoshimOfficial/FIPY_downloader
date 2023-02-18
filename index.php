@@ -31,6 +31,7 @@ setcookie("_SESSION", md5($_SESSION["user_session_id"]), time() + 120, "/");
 
    <!--library css-->
    <link rel="stylesheet" href="<?php echo get_latest_webfixer($conn)?>/assets/lib/style.css"/>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    
    <!-- dark and light mode theme check -->
    <script src="<?php echo get_latest_webfixer($conn)?>/theme.js"  ></script>

@@ -3,6 +3,8 @@
       include "./assets/files/scraper/youtube/yt.php";
       include "./assets/files/scraper/youtube/yt_video_info.php";
       include "./assets/files/youtube/video_info.php";
+      include "./assets/files/youtube/get_thumbnail.php";
+      include "./assets/files/youtube/basic_video_info.php";
    ?>
    
 <section class="overflow-x-hidden">
@@ -55,7 +57,9 @@ value="<?php echo $link?>"
       
           if($cookies_request == $session_link_request) {
 
-         echo vid_info_component(video_data($link)["title"], video_data($link)["thumbnail"], video_data($link)["duration"], $link);
+         $vid_link = $_COOKIE["_VID"];
+         echo yt_thumbnail($webfixer , $vid_link);
+         echo yt_basic_info($webfixer, $vid_link);
          echo yt_download_link($link);
          ?>
    </div>

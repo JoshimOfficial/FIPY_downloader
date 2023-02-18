@@ -64,7 +64,9 @@ if (count($table_matches[1]) > 0) {
         $i++;
     }
 } else {
-    echo '<h2 class="mt-5 tracking-tight font-extrabold  text-center text-red-600">No video found!</h2>';
+    echo '<h2 class="mt-5 tracking-tight font-extrabold  text-center text-red-600">
+    No video found or music video cannot be downloaded!
+    </h2>';
 }
 }
 ?>
