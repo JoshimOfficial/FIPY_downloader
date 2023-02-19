@@ -32,8 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             
                 }
-                else {
-                    echo "There are an unexpected error occured and we are chasing them. Please hold on untill the developers fix this.";
+                else {?>
+                    <span class="text-red-600 font-semibold">There are an unexpected error occured and we are chasing them. Please hold on untill the developers fix this.</span>
+                    <?php
                 }
             
         }
