@@ -1,16 +1,15 @@
-<?php
-include "./Facebook/cookies.php";
-include "./Facebook/standard_to_mbasic_converter.php";
-include "./Facebook/standard_url_converter.php";
+<?php 
+function fb_vid_comments($vid_url) {
 
-$cookies = fb_cookie(); 
+if (strpos($vid_url, "https://fb.watch") !== false) {
+
+    $cookies = fb_cookie();
 // Set user agent
 $user_agent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0';
-$cookies = fb_cookie();
 
-
-$vid_link = "https://fb.watch/iTkwcWLP1z/";
+$vid_link = $vid_url;
 $general_url = get_final_url($vid_link, $cookies, $user_agent);
+
 
 $url = mbasic_url($general_url);
 // Initialize curl session
@@ -26,14 +25,16 @@ curl_setopt($ch, CURLOPT_USERAGENT, $user_agent);
 $html = curl_exec($ch);
 // Suppress warning messages
 error_reporting(E_ERROR | E_PARSE);
-
-
-// Initialize DOMDocument
+// Create a new DOMDocument object
 $dom = new DOMDocument();
-// Load HTML string into DOMDocument
+
+// Load the HTML string into the DOMDocument object
 $dom->loadHTML($html);
-// Initialize DOMXPath
+
+// Create a new DOMXPath object
 $xpath = new DOMXPath($dom);
+
+
 
 
 
@@ -78,3 +79,10 @@ if ($matching_a_tag) {
 
 // Close curl session
 curl_close($ch);
+
+
+} else {
+    return "Please use `https://fb.watch/XXX` type of url to see the details";
+}
+}
+?>
