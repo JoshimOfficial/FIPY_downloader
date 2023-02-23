@@ -94,7 +94,7 @@ There are some limitation on code.
 ## Most Important Note:
 - This project isn't  more secure to use as a website.
 - This is an `Open Source` project and can be use practice purpose only.
-- If you upload it to your hosting server then you will take all risk.
+- If you upload it to your hosting server then you will take all type of risk.
 
 
 
