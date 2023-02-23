@@ -91,6 +91,13 @@ There are some limitation on code.
 - Pinterest all urls not working in sometimes.
 
 
+## Most Important Note:
+- This project isn't  more secure to use as a website.
+- This is an `Open Source` project and can be use practice purpose only.
+- If you upload it to your hosting server then you will take all risk.
+
+
+
 ## About me on this project:
 
 ```
