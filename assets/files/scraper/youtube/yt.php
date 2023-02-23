@@ -40,12 +40,10 @@ foreach ($downloadDivs as $div) {
         // Get the first h3 tag inside the div, set its innerText and attributes
         $h3List = $div->getElementsByTagName('h3');
         if ($h3List->length >= 1) {
-            $h3List[0]->nodeValue = 'Download Links 01 (With audio)';
             $h3List[0]->setAttribute('class', 'mt-16 mb-2 text-sm md:text-xl tracking-tight font-extrabold text-gray-900 dark:text-white');
         }
         // Get the second h3 tag inside the div, set its innerText and attributes
         if ($h3List->length >= 2) {
-            $h3List[1]->nodeValue = 'Download Links 02 (Without audio)';
             $h3List[1]->setAttribute('class', 'mt-16 mb-2 text-sm md:text-xl tracking-tight font-extrabold text-gray-900 dark:text-white');
         }
     }
