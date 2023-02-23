@@ -95,7 +95,8 @@ There are some limitation on code.
 
 ```
 Only I designed the font-end and also made the back-end.
-Building the logic, breaking the rules, scraping from web, taking help from google, stackoverflow, chatGPT etc
+Building the logic, breaking the rules, scraping from web, taking help from google, 
+stackoverflow, chatGPT etc
 for just updating my this project. 
 
 Thank you 💜
