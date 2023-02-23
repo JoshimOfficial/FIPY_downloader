@@ -23,7 +23,7 @@ This repository contains the source code for a video downloading website that su
 
 ## Installation
 
-You need you just clone this repo like:
+You just need to clone this repo like:
 
 ```groovy
 git clone https://github.com/JoshimOfficial/FIPY_downloader.git
@@ -40,8 +40,13 @@ set as
 - created_date = date;
 - time = time.
 
-And now manually insert a data url to your current localhost project location like:
+And now manually insert a data url to that `webfixer` as your current `localhost` project `location` like:
 
+- if you run the project from this location:
+http://localhost/downloader/FIPY_downloader/
+
+
+- then you should insert data to `webfixer` in `url` as:
 http://localhost/downloader/FIPY_downloader
 
 
