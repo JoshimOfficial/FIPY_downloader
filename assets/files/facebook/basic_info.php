@@ -25,8 +25,10 @@ function basic_info($vid_link,$webfixer) {
             
                     </div> 
 
-        <div class="ml-auto my-10 lg:col-span-7 p-4 rounded  bg-gray-300 dark:bg-gray-800  w-auto md:w-[550px] h-[350px] animate-pulse" id="basic_ajax">
-            <?php echo $_SESSION["mbasic_decode_url"];?>
+        <div class="ml-auto my-10 lg:col-span-7 p-4 rounded  bg-gray-300 dark:bg-gray-800  w-auto md:w-[550px] h-[350px] animate-pulse text-opacity-0" id="basic_ajax">
+            <div class="text-gray-900 dark:text-gray-100 h-full w-full flex justify-center items-center">
+            Wait we are retrieving data for you.....
+            </div>
         </div>  
     </div>
 </section>

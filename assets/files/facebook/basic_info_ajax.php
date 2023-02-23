@@ -12,6 +12,7 @@ include "../scraper/facebook/get_description.php";
 include "../scraper/facebook/get_pub_date.php";
 include "../scraper/facebook/get_likes.php";
 include "../scraper/facebook/get_comments.php";
+include "../scraper/facebook/basic_info/basic_info.php";
 
 
 $vid_current_url = $_COOKIE["fb_link_origin"];
@@ -22,6 +23,7 @@ $default_website = get_latest_webfixer($conn);
 if (isset($_POST["vid_link"])) {
     $vid_link = $_POST["vid_link"];
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $video_download = vid_info($vid_link);
         
 ?>
 <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Basic Video Info:</h2>
@@ -50,7 +52,7 @@ if (isset($_POST["vid_link"])) {
 <ol class="max-w-md space-y-1 text-gray-500 list-decimal list-inside dark:text-gray-400">
 <li style="margin-top: 16px;">
         <span class="font-semibold text-gray-900 dark:text-white">Link: </span> 
-        <a href="#" class="bg-blue-600 px-4 py-2 rounded text-center text-white ml-5 text-sm">Download</a>
+        <a href="<?php echo $video_download[0];?>" class="bg-blue-600 px-4 py-2 rounded text-center text-white ml-5 text-sm">Download</a>
     </li>
     </ol>
 

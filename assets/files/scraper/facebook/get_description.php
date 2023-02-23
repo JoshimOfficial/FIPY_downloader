@@ -48,7 +48,7 @@ if ($first_child_div) {
     $innerHTML = $dom->saveHTML($first_child_div);
 }
 
-return  $innerHTML;
+echo  $innerHTML;
 
 // Close curl session
 curl_close($ch);
