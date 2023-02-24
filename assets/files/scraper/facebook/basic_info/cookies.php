@@ -1,9 +1,9 @@
 <?php 
 ob_start();
 function fb_cookie() {
-$jsonStringCookie = '[
+$jsonStringCookie = '
     Insert your json cookies here.
-]';
+';
 
 $cookies = array();
 $jsonArray = json_decode($jsonStringCookie, true);
