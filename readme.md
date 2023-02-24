@@ -72,10 +72,10 @@ Now run you project index.php file to your localhost.
 
 ## Feature
 
-- Download from Facebook.
-- Download from Insta (comming soon).
-- Download from Pinterest.
-- Download from YouTube.
+- Download videos from Facebook.
+- Download videos from Insta (comming soon).
+- Download videos from Pinterest.
+- Download videos from YouTube.
 
 
 ## Limitation
