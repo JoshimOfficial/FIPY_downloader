@@ -73,6 +73,7 @@ Now run you project index.php file to your localhost.
 ## Feature
 
 - Download from Facebook.
+- Download from Insta (comming soon).
 - Download from Pinterest.
 - Download from YouTube.
 
