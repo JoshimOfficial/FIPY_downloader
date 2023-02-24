@@ -69,7 +69,7 @@ http://localhost/tailwind/10/test/FIPY_downloader
 
 Now run you project index.php file to your localhost. 
 
-If `facebook` downloader not works then apply your `fb json cookies` to `/assets/files/scraper/facebook/basic_info/cookies.php` file.
+If `facebook` downloader not works then apply your own facebook account's `json cookies` to `/assets/files/scraper/facebook/basic_info/cookies.php` file.
 
 
 ## Feature
