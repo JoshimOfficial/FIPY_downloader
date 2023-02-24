@@ -4,7 +4,7 @@
 <nav class="bg-white border-gray-200 px-2 md:px-4 py-2.5  md:border-b-2 dark:border-gray-700 dark:bg-gray-900" style="padding: 20px;">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto">
         <a href="<?php echo $give_latest_webfixer;?>" class="flex items-center">
-            <img src="<?php echo $give_latest_webfixer;?>/assets/logo_fav/logo.svg" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
+            <img src="<?php echo $give_latest_webfixer;?>/assets/logo_fav/logo.svg" class="h-6 mr-3 sm:h-9" alt="FIPY Logo" />
             <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">FIPY Downloader</span>
         </a>
         <div class="md:hidden flex items-center md:order-2">
