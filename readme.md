@@ -41,7 +41,7 @@ set as
 - id = int (primary);
 - url = varchar;
 - created_date = date;
-- time = time.
+- created_time = time.
 
 And now manually insert a data url to that `webfixer` as your current `localhost` project `location` like:
 
