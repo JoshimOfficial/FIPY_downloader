@@ -50,12 +50,20 @@ if (isset($_POST["vid_link"])) {
 <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Links:</h2>
 
 <ol class="max-w-md space-y-1 text-gray-500 list-decimal list-inside dark:text-gray-400">
+<?php 
+        if (isset($_COOKIE["hd_link"]) && $_COOKIE["sd_link"]) {
+            $sd_link = $_COOKIE["sd_link"];
+            $hd_link = $_COOKIE["hd_link"];
+        ?>
 <li style="margin-top: 16px;">
         <span class="font-semibold text-gray-900 dark:text-white">Link: </span> 
-        <a href="<?php echo $video_download[0];?>" class="bg-blue-600 px-4 py-2 rounded text-center text-white ml-5 text-sm">Download</a>
+        <a href="<?php echo $sd_link;?>" class="bg-blue-600 px-4 py-2 rounded text-center text-white ml-5 text-sm">SD Download</a>
+        <a href="<?php echo $hd_link;?>" class="bg-blue-600 px-4 py-2 rounded text-center text-white ml-5 text-sm">HD Download</a>
+        <?php
+         }
+         ?>
     </li>
     </ol>
-
     <?php 
     
 }

@@ -1,28 +1,68 @@
-<?php
-if(isset($_REQUEST["id"])) {
-    $id = "https://mbasic.facebook.com/" . $_REQUEST["id"];
+<?php 
+include("./Facebook/cookies.php");
+include("./Facebook/standard_to_mbasic_converter.php");
+include("./Facebook/standard_url_converter.php");
 
-    $ch = curl_init($id);
-curl_setopt($ch, CURLOPT_POST, false);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.7.12) Gecko/20050915 Firefox/1.0.7");
-curl_setopt($ch, CURLOPT_HEADER, false);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$cookies = array(
-    'datr=R3TjYwz6cO2TbLn70YjhxD8J',
-    'fr=0NmP8yuQW27zvGtxu.AWV7AoFUER3d8T8FZ4f8Rc_YPcs.Bj7jZV.QY.AAA.0.0.Bj7jZV.AWUK9onMWJc',
-    'i_user=100063453534211',
-    'xs=19%3AUbqfWjAdyyej5g%3A2%3A1675851303%3A-1%3A5351%3A%3AAcV8uNKUYcQS25KB5xlrBZKCUENnbQUxJMY0Zn5khn8',
-    'locale=en_US',
-    'c_user=100045943637678',
-    'm_page_voice=100063453534211',
-    'sb=R3TjY7zDHRJdVGYC-aeJb5bS',
-    'wd=1920x955'
-);
-curl_setopt($ch, CURLOPT_COOKIE, implode('; ', $cookies));
-$data = curl_exec($ch);
-
-echo $data;
+if(isset($_POST["vid_link"])) {
+    $vid_url = $_POST["vid_link"];
+    if (strpos($vid_url, "https://fb.watch") !== false) {
+    
+        $cookies = fb_cookie();
+    // Set user agent
+    $user_agent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0';
+    
+    $vid_link = $vid_url;
+    $general_url = get_final_url($vid_link, $cookies, $user_agent);
+    
+    
+    $url = mbasic_url($general_url);
+    // Initialize curl session
+    $ch = curl_init();
+    
+    // Set curl options
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_COOKIE, implode('; ', $cookies));
+    curl_setopt($ch, CURLOPT_USERAGENT, $user_agent);
+    
+    
+    // Execute curl request
+    $html = curl_exec($ch);
+    // Suppress warning messages
+    error_reporting(E_ERROR | E_PARSE);
+    
+    
+    // Initialize DOMDocument
+    $dom = new DOMDocument();
+    // Load HTML string into DOMDocument
+    $dom->loadHTML($html);
+    // Initialize DOMXPath
+    $xpath = new DOMXPath($dom);
+    
+    // Select the first article tag
+    $article = $xpath->query('//article')->item(0);
+    
+    // Select the footer tag inside the first article tag
+    $footer = $xpath->query('.//footer', $article)->item(0);
+    
+    // Select the second div tag inside the footer tag
+    $second_div = $xpath->query('.//div[2]', $footer)->item(0);
+    
+    // Select the first span tag inside the second div tag
+    $first_span = $xpath->query('.//span[1]', $second_div)->item(0);
+    
+    // Select the first a tag inside the first span tag
+    $first_a = $xpath->query('.//a[1]', $first_span)->item(0);
+    
+    // Get the inner text of the first a tag
+    $innerText = $first_a->nodeValue;
+    
+    // Output the inner text of the first a tag
+    echo $innerText;
+    // Close curl session
+    curl_close($ch);
+    
+    } 
 }
 
 ?>

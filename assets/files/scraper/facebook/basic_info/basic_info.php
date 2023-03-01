@@ -12,34 +12,69 @@ $url = mbasic_url($general_url);
 
 $_SESSION["mbasic_decode_url"] = $url;
 
-// Initialize curl session
-$ch = curl_init();
 
-// Set curl options
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_COOKIE, implode('; ', $cookies));
-curl_setopt($ch, CURLOPT_USERAGENT, $user_agent);
 
-// Execute curl request
-$html = curl_exec($ch);
 
-// Close curl session
-curl_close($ch);
+    $url = 'https://facebook-video-downloader.fly.dev/app/main.php';
+    $data = array(
+        'url' => $vid_url
+    );
+    
+    $ch = curl_init($url);
+    
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_USERAGENT, ' Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36');
+    
+    $response = curl_exec($ch);
+    
+    curl_close($ch);
+    
+    $object = json_decode($response);
+    
+    $array = json_decode(json_encode($object), true);
 
-// Extract links
-$links = array();
-preg_match_all('/video_redirect\/\?src=https%3A%2F%2Fscontent[^\'"&]+/', $html, $matches);
-if (!empty($matches[0])) {
-    foreach ($matches[0] as $match) {
-        $link = urldecode(substr($match, 18));
-        if (strpos($link, 'c=') === 0) {
-            $link = substr($link, 2);
-        }
-        $links[] = $link;
-    }
+   return $array;
+
+
 }
-// Output links
-return $links;
-}
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+// function vid_info($vid_url) {
+
+//     $url = 'https://facebook-video-downloader.fly.dev/app/main.php';
+//     $data = array(
+//         'url' => $vid_url
+//     );
+    
+//     $ch = curl_init($url);
+    
+//     curl_setopt($ch, CURLOPT_POST, 1);
+//     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+//     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//     curl_setopt($ch, CURLOPT_USERAGENT, ' Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36');
+    
+//     $response = curl_exec($ch);
+    
+//     curl_close($ch);
+    
+//     $object = json_decode($response);
+    
+//     $array = json_decode(json_encode($object), true);
+    
+//    return $array["links"];
+// }
 ?>

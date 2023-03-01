@@ -1,5 +1,5 @@
 <?php 
-function basic_info($vid_link,$webfixer) {
+function basic_info($vid_link) {
     include "./assets/files/scraper/facebook/basic_info/basic_info.php";
 
     $video_link = vid_info($vid_link);
@@ -11,7 +11,12 @@ function basic_info($vid_link,$webfixer) {
          
         <?php
     }
-    else {
+    else { 
+     $sd_vid_link= $video_link["links"]["Download Low Quality"];
+     $hd_vid_link= $video_link["links"]["Download High Quality"];
+
+     setcookie("sd_link", $sd_vid_link, time()+5, "/");
+     setcookie("hd_link", $hd_vid_link, time()+5, "/");
     ?>
 <section class="bg-white dark:bg-gray-900 ">
     <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
@@ -19,7 +24,7 @@ function basic_info($vid_link,$webfixer) {
     <div class="my-10 lg:my-0 lg:col-span-5 lg:flex">
             
             <video class="w-full text-sm max-w-md border border-gray-200 rounded-lg dark:border-gray-700 h-fit" controls>
-              <source src="<?php echo $video_link[0];?>" type="video/mp4">
+              <source src="<?php echo $video_link["links"]["Download High Quality"];?>" type="video/mp4">
               Your browser does not support the video tag.
             </video>
             

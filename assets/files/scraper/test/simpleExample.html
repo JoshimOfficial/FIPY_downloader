@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>jQuery numberAnimate.js Plugin Demo</title>
+        <style type="text/css">
+        body { background-color: #fafafa; }
+        .container { margin: 150px auto; max-width: 640px; }
+            span {
+                font: 40px / 1 Courier;
+                font-weight: bold;
+            }
+            .control {
+                font: 12px /1 Arial;
+            }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="numberAnimate.js"></script>
+         <script>
+            $(function(){
+                var $span = $('span');
+                $span.numberAnimate();
+
+                $('input[type=text]').keypress(function(e){
+                    if(e.which === 13){
+                        e.preventDefault();
+                        $span.numberAnimate('set', $(this).val());
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>jQuery numberAnimate.js Plugin Demo</h1>
+        <span class="well">123.00</span>
+        <div class="control">
+            <h3>Set value to</h3>
+            <input type="text" class="form-control">
+        </div>
+    </div>
+    </body>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</html>

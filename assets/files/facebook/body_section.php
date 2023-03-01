@@ -53,7 +53,7 @@
 
 
             <?php
-            echo basic_info($fb_vid_link, $webfixer);
+            echo basic_info($fb_vid_link,);
          }
       }
       else {
