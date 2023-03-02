@@ -50,7 +50,7 @@
 
 <section class="bg-white dark:bg-gray-900 w-full h-full flex justify-center items-center">
 
-<div class="text-gray-900 bg-gray-800 md:h-fit md:w-1/3 md:p-28 dark:text-gray-100 flex justify-center items-center" bis_skin_checked="1">
+<div class="text-gray-900 bg-gray-100 dark:bg-gray-800 md:h-fit md:w-1/3 md:p-28 dark:text-gray-100 flex justify-center items-center" bis_skin_checked="1">
            <div class="w-full h-full rounded p-5">
             <span class="text-gray-900 dark:text-gray-100">Reel URL: <?php echo $reel_origin_link;?></span> <br><br>
             <span class="text-gray-900 dark:text-gray-100">Download Link URL: <a href="insta_download.php" target="_blank" class="text-blue-600 underline" rel="noopener noreferrer">Click here</a></span>
