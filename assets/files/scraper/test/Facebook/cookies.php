@@ -2,8 +2,7 @@
 ob_start();
 function fb_cookie() {
 $jsonStringCookie =
-'
-your json cookies
+'your json cookies
 ';
 
 $cookies = array();

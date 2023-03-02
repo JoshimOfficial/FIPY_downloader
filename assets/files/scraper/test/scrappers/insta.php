@@ -2,7 +2,7 @@
 header("Content-type:application/json");
 $url = 'https://snapinsta.io/api/ajaxSearch/instagram';
 $data = array(
-    'q' => 'https://www.instagram.com/reel/CnuSW4_Juch/?utm_source=ig_web_copy_link',
+    'q' => 'https://www.instagram.com/reels/ClsyQ57vst8/',
     'vt' => 'facebook'
 );
 
@@ -16,7 +16,7 @@ curl_setopt($ch, CURLOPT_USERAGENT, ' Mozilla/5.0 (Windows NT 10.0; Win64; x64) 
 $response = curl_exec($ch);
 
 curl_close($ch);
+$array_reels = json_decode(($response),true);
 
-print_r(json_decode($response))
-
+echo $array_reels["data"];
 ?>

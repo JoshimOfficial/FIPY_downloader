@@ -36,6 +36,6 @@ $comes_form_url = comes_form($current_url);
 
 }
 else {
-    header("location: $home_page?handler=error");
+    header("location: $home_page?handler=errorFB");
     exit();
 }
