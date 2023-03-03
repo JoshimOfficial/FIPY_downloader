@@ -18,7 +18,6 @@ $response = curl_exec($ch);
 curl_close($ch);
 $array_reels = json_decode(($response),true);
 
-$reel_link =[];
 
 if (array_key_exists('data', $array_reels)) {
     $html = $array_reels['data'];

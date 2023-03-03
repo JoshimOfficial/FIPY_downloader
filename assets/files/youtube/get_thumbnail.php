@@ -2,7 +2,7 @@
 function yt_thumbnail($webfixer, $vid_link) {
     ?>
 <div class="thumbnail max-w-4xl p-3 m-auto">
-    <img id="thumbnail_cover" src="" class="rounded"/>
+    <img id="thumbnail_cover" class="w-full" src="" class="rounded"/>
   <div class="thumbnail_cover_parent thumbnail_skeleton max-w-4xl  h-[270px] md:h-[550px] rounded bg-gradient-to-r from-gray-200 to-gray-200 dark:from-gray-800 dark:to-gray-800 bg-cover bg-center animate-pulse">
   </div>
 

@@ -1,147 +1,337 @@
 <?php
 function yt_download_link($yt_video_url) {
 
-$url = "https://10downloader.com/download?v=$yt_video_url";
+    // Set the URL and payload
+$url = 'https://save-from.net/api/convert';
+$payload = json_encode(array(
+    'url' => $yt_video_url
+));
 
-// Get the contents of the webpage
-$html = file_get_contents($url);
+// Initialize cURL
+$ch = curl_init();
 
-// Use a regular expression to extract both tables with the class "downloadsTable"
-preg_match_all('/<table.*?class="downloadsTable".*?>(.*?)<\/table>/s', $html, $table_matches);
+// Set the cURL options
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'Content-Length: ' . strlen($payload)
+));
+curl_setopt($ch, CURLOPT_USERAGENT, ' Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36');
 
-// Check if any matches were found
-if (count($table_matches[1]) > 0) {
+// Execute the cURL request
+$response = curl_exec($ch);
 
-// Disable libxml errors and clear error buffer
-libxml_use_internal_errors(true);
-$dom = new DOMDocument();
-$dom->loadHTML($html);
-libxml_clear_errors();
+// Close cURL
+curl_close($ch);
 
-// Create a DOMXPath object to query the document
-$xpath = new DOMXPath($dom);
+$links_as_array = json_decode($response,true);
 
-// Check if the "video-downloads" div exists
-if ($xpath->query('//*[@id="video-downloads"]')->length > 0) {
-  // Get the div element with id "video-downloads"
-  $videoDownloadsDiv = $xpath->query('//*[@id="video-downloads"]')->item(0);
-
-  // Get all the child elements of the "video-downloads" div
-  $childElements = $videoDownloadsDiv->childNodes;
-
-  // Print the HTML of the child elements
-  foreach ($childElements as $element) {
+$total_links = count($links_as_array["url"]);
+    ?>
+    <section class="md:w-1/2 p-2 flex flex-col justify-center m-auto">
 
 
-// Get all the divs with class "download-type"
-$downloadDivs = $dom->getElementsByTagName('div');
-foreach ($downloadDivs as $div) {
-    if ($div->getAttribute('class') === 'download-type') {
-        // Get the first h3 tag inside the div, set its innerText and attributes
-        $h3List = $div->getElementsByTagName('h3');
-        if ($h3List->length >= 1) {
-            $h3List[0]->setAttribute('class', 'mt-16 mb-2 text-sm md:text-xl tracking-tight font-extrabold text-gray-900 dark:text-white');
-        }
-        // Get the second h3 tag inside the div, set its innerText and attributes
-        if ($h3List->length >= 2) {
-            $h3List[1]->setAttribute('class', 'mt-16 mb-2 text-sm md:text-xl tracking-tight font-extrabold text-gray-900 dark:text-white');
+    <div class="my-7">
+    <h2 class="text-gray-900 dark:text-gray-100 font-bold my-2 md:text-xl">
+          Download (with audio)
+       </h2>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                    Quality
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        <div class="flex items-center">
+                        Format
+                        </div>
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        <div class="flex items-center">
+                        Size
+                        </div>
+                    </th>              
+                   
+                    <th scope="col" class="px-6 py-3">
+                        <div class="flex items-center">
+                        Download
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+            <?php 
+        for($i = 0; $i < $total_links; $i++) {
+
+if($links_as_array["url"][$i]["quality"] && $links_as_array["url"][$i]["name"] && $links_as_array["url"][$i]["url"]) {
+
+    if((count($links_as_array["url"][$i]["attr"]) < 1 || strlen($links_as_array["url"][$i]["attr"]["class"]) < 1) && $links_as_array["url"][$i]["name"] === "MP4") {
+
+
+
+?>
+                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <?php 
+                        echo $links_as_array["url"][$i]["quality"];
+                        ?>
+                    </th>
+                    <td class="px-6 py-4">
+                        <?php 
+                        echo $links_as_array["url"][$i]["name"];
+                        ?>
+                    </td>
+                    <td class="px-6 py-4">
+                        <?php 
+                        if(array_key_exists("filesize",$links_as_array["url"][$i])) {
+                            $total_mb = ($links_as_array["url"][$i]["filesize"])/1000000;
+
+                            echo number_format($total_mb,2) . " MB";
+                        }
+                        else {
+                            echo "∞";
+                        }
+                        ?>
+                    </td>
+                    <td class="px-6 py-4">
+                    <?php 
+                        if(array_key_exists("url",$links_as_array["url"][$i])) {
+                            ?>
+                            
+                            <a href="<?php echo $links_as_array["url"][$i]["url"];?>" class="text-blue-600 underline">Download</a>
+                        
+                        
+                        <?php
+                        }
+                        else {
+                            echo "Failed to generate download link.";
+                        }
+                        ?>
+                    </td>
+    
+                </tr>
+                <?php 
+                
+            } 
         }
     }
-}
+        ?>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    
 
 
 
-$xpath = new DOMXPath($dom);
+    
+    <div class="my-7">
+    <h2 class="text-gray-900 dark:text-gray-100 font-bold my-2 md:text-xl">
+          Download (without audio)
+       </h2>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                    Quality
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        <div class="flex items-center">
+                        Format
+                        </div>
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        <div class="flex items-center">
+                        Size
+                        </div>
+                    </th>              
+                   
+                    <th scope="col" class="px-6 py-3">
+                        <div class="flex items-center">
+                        Download
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
 
-// Find the last th element under thead
-$lastTh = $xpath->query('//thead/tr/th[last()]')->item(0);
+            <?php 
+        for($i = 0; $i < $total_links; $i++) {
 
-// Set the text content of the last th element to "Download Links"
-$lastTh->textContent = 'Download Links';
+if($links_as_array["url"][$i]["quality"] && $links_as_array["url"][$i]["name"] && $links_as_array["url"][$i]["url"]) {
 
-
-$tds = $xpath->query(".//tbody//td", $element);
-
-// Loop through each td tag and set the innerText to 'X' if it's empty
-foreach ($tds as $td) {
-  if (empty(trim($td->textContent))) {
-    $td->textContent = '∞';
-  }
-}
-
-// Get the updated HTML content
-$data = $dom->saveHTML($element);
+    if((count($links_as_array["url"][$i]["attr"]) < 1 || strlen($links_as_array["url"][$i]["attr"]["class"]) > 1) && $links_as_array["url"][$i]["name"] === "MP4") {
 
 
 
+?>
+                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <?php 
+                        echo $links_as_array["url"][$i]["quality"];
+                        ?>
+                    </th>
+                    <td class="px-6 py-4">
+                        <?php 
+                        echo $links_as_array["url"][$i]["name"];
+                        ?>
+                    </td>
+                    <td class="px-6 py-4">
+                        <?php 
+                        if(array_key_exists("filesize",$links_as_array["url"][$i])) {
+                            $total_mb = ($links_as_array["url"][$i]["filesize"])/1000000;
 
-
-// Get all the span elements with class "downloadInstruction"
-$downloadInstructions = $dom->getElementsByTagName('span');
-foreach ($downloadInstructions as $instruction) {
-    if ($instruction->getAttribute('class') === 'downloadInstruction') {
-        // Remove the span element
-        $instruction->parentNode->removeChild($instruction);
+                            echo number_format($total_mb,2) . " MB";
+                        }
+                        else {
+                            echo "∞";
+                        }
+                        ?>
+                    </td>
+                    <td class="px-6 py-4">
+                    <?php 
+                        if(array_key_exists("url",$links_as_array["url"][$i])) {
+                            ?>
+                            
+                            <a href="<?php echo $links_as_array["url"][$i]["url"];?>" class="text-blue-600 underline">Download</a>
+                        
+                        
+                        <?php
+                        }
+                        else {
+                            echo "Failed to generate download link.";
+                        }
+                        ?>
+                    </td>
+    
+                </tr>
+                <?php 
+                
+            } 
+        }
     }
-}
+        ?>
+            </tbody>
+        </table>
+    </div>
+    </div>
 
 
 
-// Find all tables in the HTML string and add the specified attributes to their table, thead, th, tbody, tr, and td elements
-$data = preg_replace_callback(
-   '/<table\b[^>]*>(.*?)<\/table>/s',
-   function ($matches) {
-       $table = $matches[0];
-       $table = preg_replace('/<table\b/', '<table border="1" class="w-full text-sm text-gray-500 dark:text-gray-400 text-center"', $table);
-       $table = preg_replace_callback(
-           '/<thead\b[^>]*>(.*?)<\/thead>/s',
-           function ($matches) {
-               $thead = $matches[0];
-               $thead = preg_replace_callback(
-                   '/<th\b[^>]*>(.*?)<\/th>/s',
-                   function ($matches) {
-                       $th = $matches[0];
-                       return preg_replace('/<th\b/', '<th scope="col" class="px-6 py-3"', $th);
-                   },
-                   $thead
-               );
-               return preg_replace('/<thead\b/', '<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"', $thead);
-           },
-           $table
-       );
-       $table = preg_replace_callback(
-           '/<tbody\b[^>]*>(.*?)<\/tbody>/s',
-           function ($matches) {
-               $tbody = $matches[0];
-               $tbody = preg_replace('/<tr\b/', '<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"', $tbody);
-               $tbody = preg_replace('/<td\b/', '<td class="px-6 py-4"', $tbody);
-               return $tbody;
-           },
-           $table
-       );
-       return '<div class="relative overflow-x-auto shadow-md rounded">' . $table . '</div>';
-   },
-   $data
-);
 
 
-// Output the final HTML
-echo " <style> a.downloadBtn {color: #1d69ff; text-decoration: underline;} </style> <div class='p-3 md:w-1/2 m-auto'>". $data . "</div>";
 
 
-   
-   }
-} else {
-    echo '<h2 class="mt-5 tracking-tight font-extrabold  text-center text-red-600">
-    No video found or music video cannot be downloaded!
-    </h2>';
-}
 
 
-} else {
-    echo '<h2 class="mt-5 tracking-tight font-extrabold  text-center text-red-600">
-    No video found or music video cannot be downloaded!
-    </h2>';
-}
+
+    <div class="my-7">
+    <h2 class="text-gray-900 dark:text-gray-100 font-bold my-2 md:text-xl">
+          Download (with audio)
+       </h2>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                    Quality
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        <div class="flex items-center">
+                        Format
+                        </div>
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        <div class="flex items-center">
+                        Size
+                        </div>
+                    </th>              
+                   
+                    <th scope="col" class="px-6 py-3">
+                        <div class="flex items-center">
+                        Download
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+            <?php 
+        for($i = 0; $i < $total_links; $i++) {
+
+if($links_as_array["url"][$i]["quality"] && $links_as_array["url"][$i]["name"] && $links_as_array["url"][$i]["url"]) {
+
+    if((count($links_as_array["url"][$i]["attr"]) < 1 || strlen($links_as_array["url"][$i]["attr"]["class"]) < 1) && $links_as_array["url"][$i]["name"] === "Audio OPUS") {
+
+
+
+?>
+                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <?php 
+                        echo $links_as_array["url"][$i]["quality"];
+                        ?>
+                    </th>
+                    <td class="px-6 py-4">
+                        <?php 
+                        echo $links_as_array["url"][$i]["name"];
+                        ?>
+                    </td>
+                    <td class="px-6 py-4">
+                        <?php 
+                        if(array_key_exists("filesize",$links_as_array["url"][$i])) {
+                            $total_mb = ($links_as_array["url"][$i]["filesize"])/1000000;
+
+                            echo number_format($total_mb,2) . " MB";
+                        }
+                        else {
+                            echo "∞";
+                        }
+                        ?>
+                    </td>
+                    <td class="px-6 py-4">
+                    <?php 
+                        if(array_key_exists("url",$links_as_array["url"][$i])) {
+                            ?>
+                            
+                            <a href="<?php echo $links_as_array["url"][$i]["url"];?>" class="text-blue-600 underline">Download</a>
+                        
+                        
+                        <?php
+                        }
+                        else {
+                            echo "Failed to generate download link.";
+                        }
+                        ?>
+                    </td>
+    
+                </tr>
+                <?php 
+                
+            } 
+        }
+    }
+        ?>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    
+
+
+
+
+
+    
+    </section>
+
+
+<?php
 }
 ?>

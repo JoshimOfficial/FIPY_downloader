@@ -13,8 +13,7 @@
          <h1 class="mb-4 text-2xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white uppercase">FIPY Downloader ~ YouTube</h1>
          <p class="hidden md:flex mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Our website allows users to download videos from a variety of sources, including YouTube. Simply search for the video you wish to download and follow the prompts to save it to your device. Enjoy!</p>
          <p class="md:hidden text-lg font-normal text-gray-500 lg:text-xl px-1 xl:px-48 dark:text-gray-400">Our website allows users to download videos from YouTube using mobile. Enjoy it.</p>         
-         <p class="text-red-600 font-semibold">Note: Every music video cannot be downloaded and developers are chasing to solution.</p>
-         <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+        <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
          </div>
          <form class="flex items-center" method="POST" action="./yt.php">
             <label for="voice-search" class="sr-only">Search</label>
