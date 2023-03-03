@@ -232,7 +232,7 @@ if($links_as_array["url"][$i]["quality"] && $links_as_array["url"][$i]["name"] &
 
     <div class="my-7">
     <h2 class="text-gray-900 dark:text-gray-100 font-bold my-2 md:text-xl">
-          Download (with audio)
+          Download (only audio)
        </h2>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-gray-500 dark:text-gray-400">
