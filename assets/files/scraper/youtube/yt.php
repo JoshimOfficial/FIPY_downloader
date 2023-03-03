@@ -66,7 +66,7 @@ $total_links = count($links_as_array["url"]);
             <tbody>
 
             <?php 
-        for($i = 0; $i < $total_links; $i++) {
+        for($i = $total_links-1; $i > -1; $i--) {
 
 if($links_as_array["url"][$i]["quality"] && $links_as_array["url"][$i]["name"] && $links_as_array["url"][$i]["url"]) {
 
@@ -160,9 +160,8 @@ if($links_as_array["url"][$i]["quality"] && $links_as_array["url"][$i]["name"] &
                 </tr>
             </thead>
             <tbody>
-
             <?php 
-        for($i = 0; $i < $total_links; $i++) {
+        for($i = $total_links-1; $i > -1; $i--) {
 
 if($links_as_array["url"][$i]["quality"] && $links_as_array["url"][$i]["name"] && $links_as_array["url"][$i]["url"]) {
 
@@ -263,7 +262,7 @@ if($links_as_array["url"][$i]["quality"] && $links_as_array["url"][$i]["name"] &
             <tbody>
 
             <?php 
-        for($i = 0; $i < $total_links; $i++) {
+        for($i = $total_links-1; $i > -1; $i--) {
 
 if($links_as_array["url"][$i]["quality"] && $links_as_array["url"][$i]["name"] && $links_as_array["url"][$i]["url"]) {
 
