@@ -89,10 +89,6 @@ There are some limitation on code.
 - Facebook video can be downloaded if url contains `https://fb.com/watch/XXXX`.
 - Facebook video uploader name can be shown wrong sometimes.
 
-`YouTube:`
-- Youtube video download section may not be shown sometimes.
-- Youtube all urls sometime may not work properly.
-
 `Pinterest:`
 - Pinterest all urls not working in sometimes.
 
