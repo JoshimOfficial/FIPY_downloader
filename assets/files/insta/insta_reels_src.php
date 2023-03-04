@@ -31,6 +31,7 @@ if (array_key_exists('data', $array_reels)) {
         
             // Set the URL of the video to download
 $cdn_link = $href_value;
+setcookie("CDN_LINK", $cdn_link, time()+5, "/");
 
 // Get the contents of the video
 $video = file_get_contents($cdn_link);

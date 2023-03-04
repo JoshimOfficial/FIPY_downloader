@@ -10,6 +10,40 @@
          $reel_origin_link = $_SESSION["REELS_LINK"];
 
          if($cooke_session === $insta_session) {
+
+            $url = 'https://snapinsta.io/api/ajaxSearch/instagram';
+            $data = array(
+                'q' => $reel_origin_link,
+                'vt' => 'facebook'
+            );
+            
+            $ch = curl_init($url);
+            
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_USERAGENT, ' Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36');
+            
+            $response = curl_exec($ch);
+            
+            curl_close($ch);
+            $array_reels = json_decode(($response),true);
+            
+            
+            if (array_key_exists('data', $array_reels)) {
+                $html = $array_reels['data'];
+                $dom = new DOMDocument();
+                $dom->loadHTML($html, LIBXML_NOERROR | LIBXML_NOWARNING);
+                $xpath = new DOMXPath($dom);
+                $a_tags = $xpath->query('//a');
+                if ($a_tags->length > 0) {
+                    $first_a_tag = $a_tags->item(0);
+                    $href_value = $first_a_tag->getAttribute('href');
+                    
+                        // Set the URL of the video to download
+            $cdn_link = $href_value;
+                }
+                 }
            
    ?>
 <section class="overflow-x-hidden">
@@ -32,7 +66,7 @@
                      <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                   </svg>
                </div>
-               <input type="text" name="reeks_link" id="voice-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded md:h-12 focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://www.instagram.com/reel/Co6eG3QDUzZ/?utm_source=ig_web_copy_link" required>
+               <input type="text" name="reeks_link" id="voice-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded md:h-12 focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://www.instagram.com/reel/Co6eG3QDUzZ/?utm_source=ig_web_copy_link" required value="<?php echo $reel_origin_link?>">
             </div>
             <input type="hidden" name="current_url" value="<?php $current_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
                echo $current_url;
@@ -48,14 +82,32 @@
    </section>
 </section>
 
-<section class="bg-white dark:bg-gray-900 w-full h-full flex justify-center items-center">
-
-<div class="text-gray-900 bg-gray-100 dark:bg-gray-800 md:h-fit md:w-1/3 md:p-28 dark:text-gray-100 flex justify-center items-center" bis_skin_checked="1">
-           <div class="w-full h-full rounded p-5">
-            <span class="text-gray-900 dark:text-gray-100">Reel URL: <?php echo $reel_origin_link;?></span> <br><br>
-            <span class="text-gray-900 dark:text-gray-100">Download Link URL: <a href="insta_download.php" target="_blank" class="text-blue-600 underline" rel="noopener noreferrer">Click here</a></span>
-           </div>
-            </div>
+<section class="bg-white dark:bg-gray-900">
+    <div class="grid max-w-screen-xl px-5 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+        <div class="mr-auto place-self-center lg:col-span-7">
+        <video class="w-full text-sm max-w-md border border-gray-200 rounded-lg dark:border-gray-700 h-fit" controls>
+              <source src="<?php echo $cdn_link;?>" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="lg:mt-0 lg:col-span-5 flex flex-col bg-gray-200 dark:bg-gray-800 rounded h-fit w-fit md:p-5 p-2 font-normal text-gray-600 dark:text-gray-300">
+           <span class="my-2">Reels link: <?php echo $reel_origin_link?></span>
+           <span class="my-2">Reels valid: <span class="font-bold">
+            <?php 
+            if (strpos($reel_origin_link, 'https://www.instagram.com/p/') !== false || strpos($reel_origin_link, 'https://www.instagram.com/reel/') !== false || strpos($reel_origin_link, 'https://www.instagram.com/reels/') !== false){
+               echo '<span class="text-green-500">true</span>';
+            ?>
+           </span></span>
+           <span class="my-2">Download Links: <a href="./insta_download.php" class="ml-2 bg-blue-600 text-white px-4 py-2 rounded font-bold">HD Download</a></span>
+           
+           <?php 
+                      } else {
+                        echo '<span class="text-red-600">false</span>';
+                    }
+           ?>
+           
+        </div>                
+    </div>
 </section>
 
 
